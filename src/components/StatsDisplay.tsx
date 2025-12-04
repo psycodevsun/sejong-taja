@@ -6,11 +6,22 @@ interface StatsDisplayProps {
   accuracy: number;
   errorRate: number;
   showSpeed?: boolean;
+  completedCount?: number;
+  countLabel?: string;
 }
 
-export function StatsDisplay({ wpm, cpm, accuracy, errorRate, showSpeed = true }: StatsDisplayProps) {
+export function StatsDisplay({ wpm, cpm, accuracy, errorRate, showSpeed = true, completedCount, countLabel = '완료' }: StatsDisplayProps) {
   return (
     <div className={styles.container}>
+      {completedCount !== undefined && (
+        <>
+          <div className={styles.stat}>
+            <span className={`${styles.value} ${styles.count}`}>{completedCount}</span>
+            <span className={styles.label}>{countLabel}</span>
+          </div>
+          <div className={styles.divider} />
+        </>
+      )}
       {showSpeed && (
         <>
           <div className={styles.stat}>

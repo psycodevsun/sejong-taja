@@ -224,25 +224,39 @@ export function Keyboard({ language, activeKey, showFingers = true }: KeyboardPr
 
       {showFingers && (
         <div className={styles.legend}>
-          <div className={styles.legendItem}>
-            <span className={`${styles.legendColor} ${styles.pinky_left}`} />
-            <span>새끼</span>
+          <div className={styles.legendTitle}>손가락 색상</div>
+          <div className={styles.legendRow}>
+            <div className={styles.legendItem}>
+              <span className={`${styles.legendColor} ${styles.pinky}`} />
+              <span>새끼</span>
+            </div>
+            <div className={styles.legendItem}>
+              <span className={`${styles.legendColor} ${styles.ring}`} />
+              <span>약지</span>
+            </div>
+            <div className={styles.legendItem}>
+              <span className={`${styles.legendColor} ${styles.middle}`} />
+              <span>중지</span>
+            </div>
+            <div className={styles.legendItem}>
+              <span className={`${styles.legendColor} ${styles.index}`} />
+              <span>검지</span>
+            </div>
+            <div className={styles.legendItem}>
+              <span className={`${styles.legendColor} ${styles.thumb}`} />
+              <span>엄지</span>
+            </div>
           </div>
-          <div className={styles.legendItem}>
-            <span className={`${styles.legendColor} ${styles.ring_left}`} />
-            <span>약지</span>
-          </div>
-          <div className={styles.legendItem}>
-            <span className={`${styles.legendColor} ${styles.middle_left}`} />
-            <span>중지</span>
-          </div>
-          <div className={styles.legendItem}>
-            <span className={`${styles.legendColor} ${styles.index_left}`} />
-            <span>검지</span>
-          </div>
-          <div className={styles.legendItem}>
-            <span className={`${styles.legendColor} ${styles.thumb_right}`} />
-            <span>엄지</span>
+          <div className={styles.legendTitle}>왼손/오른손 구분</div>
+          <div className={styles.legendRow}>
+            <div className={styles.legendItem}>
+              <span className={`${styles.legendColor} ${styles.leftHand}`} />
+              <span>왼손 (왼쪽 색칠)</span>
+            </div>
+            <div className={styles.legendItem}>
+              <span className={`${styles.legendColor} ${styles.rightHand}`} />
+              <span>오른손 (오른쪽 색칠)</span>
+            </div>
           </div>
         </div>
       )}

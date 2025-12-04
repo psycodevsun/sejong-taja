@@ -35,6 +35,10 @@
   color: var(--warning);
 }
 
+.value.count {
+  color: var(--primary-light);
+}
+
 .label {
   font-size: 0.75rem;
   color: var(--text-muted);
