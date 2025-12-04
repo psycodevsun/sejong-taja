@@ -4,7 +4,7 @@ import { StatsDisplay } from './StatsDisplay';
 import { useTypingStats } from '../hooks/useTypingStats';
 import type { Language, PracticeMode } from '../types';
 import { koreanWords, koreanSentences, koreanParagraphs, koreanParagraphsData } from '../data/korean';
-import { englishWords, englishSentences, englishParagraphs } from '../data/english';
+import { englishWords, englishSentences, englishParagraphs, englishParagraphsData } from '../data/english';
 
 interface TypingPracticeProps {
   language: Language;
@@ -59,6 +59,7 @@ function getPracticeText(
 export function TypingPractice({ language, mode }: TypingPracticeProps) {
   const [targetText, setTargetText] = useState('');
   const [translation, setTranslation] = useState('');
+  const [sentenceTranslations, setSentenceTranslations] = useState<string[]>([]); // 영어 장문용 문장별 번역
   const [userInput, setUserInput] = useState('');
   const [isStarted, setIsStarted] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
@@ -111,7 +112,7 @@ export function TypingPractice({ language, mode }: TypingPracticeProps) {
     let title = '';
     let targetIndex: number;
 
-    // 장문 모드에서 특정 인덱스가 지정된 경우
+    // 장문 모드에서 특정 인덱스가 지정된 경우 (한글)
     if (mode === 'paragraph' && language === 'korean' && paragraphIndex !== undefined) {
       targetIndex = paragraphIndex;
     } else if (mode === 'paragraph' && language === 'korean' && continueToNextPart && selectedParagraphIndex !== null) {
@@ -121,6 +122,12 @@ export function TypingPractice({ language, mode }: TypingPracticeProps) {
     } else if (mode === 'paragraph' && language === 'korean') {
       // 랜덤 선택
       targetIndex = Math.floor(Math.random() * koreanParagraphsData.length);
+    } else if (mode === 'paragraph' && language === 'english' && paragraphIndex !== undefined) {
+      // 영어 장문 - 특정 인덱스가 지정된 경우
+      targetIndex = paragraphIndex;
+    } else if (mode === 'paragraph' && language === 'english') {
+      // 영어 장문 - 랜덤 선택
+      targetIndex = Math.floor(Math.random() * englishParagraphsData.length);
     } else {
       rawText = getPracticeText(language, mode, usedTexts);
       usedTexts.add(rawText);
@@ -150,16 +157,26 @@ export function TypingPractice({ language, mode }: TypingPracticeProps) {
       return;
     }
 
-    // 한글 장문 처리
-    const paragraphData = koreanParagraphsData[targetIndex];
-    rawText = paragraphData.content;
-    title = `${paragraphData.title} - ${paragraphData.author}`;
+    // 장문 처리 (한글/영어)
+    if (language === 'korean') {
+      const paragraphData = koreanParagraphsData[targetIndex];
+      rawText = paragraphData.content;
+      title = `${paragraphData.title} - ${paragraphData.author}`;
+      setTranslation('');
+      setSentenceTranslations([]);
+    } else {
+      // 영어 장문 - 문장 배열을 공백으로 연결
+      const paragraphData = englishParagraphsData[targetIndex];
+      rawText = paragraphData.sentences.join(' ');
+      title = paragraphData.title;
+      setTranslation('');
+      setSentenceTranslations(paragraphData.translations);
+    }
     setSelectedParagraphIndex(targetIndex);
 
     usedTexts.add(rawText);
     setCurrentParagraphTitle(title);
     setTargetText(rawText);
-    setTranslation('');
 
     setUserInput('');
     setIsStarted(false);
@@ -485,6 +502,11 @@ export function TypingPractice({ language, mode }: TypingPracticeProps) {
       // 현재 입력 중인 라인에 ref 할당
       const isCurrentLine = lineIndex === currentLineIdx;
 
+      // 영어 장문 모드에서 해당 문장의 번역 가져오기
+      const sentenceTranslation = mode === 'paragraph' && language === 'english' && sentenceTranslations[lineIndex]
+        ? sentenceTranslations[lineIndex]
+        : null;
+
       return (
         <div
           key={lineIndex}
@@ -495,6 +517,10 @@ export function TypingPractice({ language, mode }: TypingPracticeProps) {
           {/* 단어/단문 모드에서 번역을 원문 바로 아래에 표시 */}
           {mode !== 'paragraph' && translation && lineIndex === 0 && (
             <div className={styles.translation}>({translation})</div>
+          )}
+          {/* 영어 장문 모드에서 문장별 번역 표시 */}
+          {sentenceTranslation && (
+            <div className={styles.translation}>({sentenceTranslation})</div>
           )}
           <div className={styles.inputLine}>{inputChars}</div>
         </div>
@@ -515,7 +541,7 @@ export function TypingPractice({ language, mode }: TypingPracticeProps) {
         />
 
         {/* 장문 모드에서 제목과 글 선택 버튼 표시 */}
-        {mode === 'paragraph' && language === 'korean' && (
+        {mode === 'paragraph' && (
           <div className={styles.paragraphHeader}>
             {currentParagraphTitle && (
               <span className={styles.paragraphTitle}>{currentParagraphTitle}</span>
@@ -529,7 +555,7 @@ export function TypingPractice({ language, mode }: TypingPracticeProps) {
           </div>
         )}
 
-        {/* 장문 선택 모달 */}
+        {/* 장문 선택 모달 - 한글 */}
         {showParagraphSelector && mode === 'paragraph' && language === 'korean' && (
           <div className={styles.paragraphSelector}>
             <div className={styles.selectorHeader}>
@@ -554,6 +580,36 @@ export function TypingPractice({ language, mode }: TypingPracticeProps) {
                   <span className={styles.itemTitle}>{p.title}</span>
                   <span className={styles.itemAuthor}>{p.author}</span>
                   <span className={styles.itemLength}>{p.content.length}자</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* 장문 선택 모달 - 영어 */}
+        {showParagraphSelector && mode === 'paragraph' && language === 'english' && (
+          <div className={styles.paragraphSelector}>
+            <div className={styles.selectorHeader}>
+              <span>연습할 글을 선택하세요</span>
+              <button
+                className={styles.randomBtn}
+                onClick={() => {
+                  setShowParagraphSelector(false);
+                  generateNewText(true);
+                }}
+              >
+                랜덤 선택
+              </button>
+            </div>
+            <div className={styles.paragraphList}>
+              {englishParagraphsData.map((p, index) => (
+                <button
+                  key={index}
+                  className={`${styles.paragraphItem} ${selectedParagraphIndex === index ? styles.selected : ''}`}
+                  onClick={() => handleSelectParagraph(index)}
+                >
+                  <span className={styles.itemTitle}>{p.title}</span>
+                  <span className={styles.itemLength}>{p.sentences.join(' ').length}자</span>
                 </button>
               ))}
             </div>

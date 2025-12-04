@@ -494,64 +494,419 @@ export const englishSentences: string[] = [
 ];
 
 // 장문 연습용 텍스트
-export const englishParagraphs: string[] = [
+// 영어 장문 데이터 구조 (문장 단위 번역 포함)
+export interface EnglishParagraphData {
+  title: string;
+  sentences: string[];      // 영어 문장 배열
+  translations: string[];   // 한글 번역 배열 (sentences와 1:1 매칭)
+}
+
+export const englishParagraphsData: EnglishParagraphData[] = [
   // 1. The Morning Routine
-  `Sarah woke up to the sound of birds chirping outside her window. The soft morning light filtered through the curtains, casting gentle shadows across her room. She stretched her arms and yawned, feeling the warmth of her blanket one last time before getting up. In the kitchen, she made herself a cup of hot coffee and watched the steam rise into the air. The aroma filled the room, waking up her senses completely. She sat by the window and watched the neighborhood come alive as people walked their dogs and children waited for the school bus.`,
-
+  {
+    title: 'The Morning Routine (아침 일과)',
+    sentences: [
+      'Sarah woke up to the sound of birds chirping outside her window.',
+      'The soft morning light filtered through the curtains, casting gentle shadows across her room.',
+      'She stretched her arms and yawned, feeling the warmth of her blanket one last time before getting up.',
+      'In the kitchen, she made herself a cup of hot coffee and watched the steam rise into the air.',
+      'The aroma filled the room, waking up her senses completely.',
+      'She sat by the window and watched the neighborhood come alive as people walked their dogs and children waited for the school bus.',
+    ],
+    translations: [
+      '사라는 창밖에서 지저귀는 새소리에 잠에서 깼다.',
+      '부드러운 아침 햇살이 커튼을 통해 스며들어 방 안에 은은한 그림자를 드리웠다.',
+      '그녀는 기지개를 켜고 하품을 하며 일어나기 전 마지막으로 담요의 온기를 느꼈다.',
+      '부엌에서 그녀는 뜨거운 커피 한 잔을 만들고 김이 공기 중으로 피어오르는 것을 바라봤다.',
+      '향기가 방 안에 가득 차며 그녀의 감각을 완전히 깨웠다.',
+      '그녀는 창가에 앉아 사람들이 개를 산책시키고 아이들이 스쿨버스를 기다리는 동네의 활기를 지켜봤다.',
+    ],
+  },
   // 2. The Old Bookstore
-  `The little bookstore on Maple Street had been there for over fifty years. Its wooden shelves were filled with thousands of books, their spines creating a colorful mosaic of stories waiting to be discovered. Mr. Thompson, the elderly owner, knew exactly where every book was located. He would recommend titles to customers based on their mood and interests. The smell of old paper and leather bindings created an atmosphere that modern stores could never replicate. Students and writers often spent hours browsing through the aisles, finding treasures they never knew they were looking for.`,
-
+  {
+    title: 'The Old Bookstore (오래된 서점)',
+    sentences: [
+      'The little bookstore on Maple Street had been there for over fifty years.',
+      'Its wooden shelves were filled with thousands of books, their spines creating a colorful mosaic of stories waiting to be discovered.',
+      'Mr. Thompson, the elderly owner, knew exactly where every book was located.',
+      'He would recommend titles to customers based on their mood and interests.',
+      'The smell of old paper and leather bindings created an atmosphere that modern stores could never replicate.',
+      'Students and writers often spent hours browsing through the aisles, finding treasures they never knew they were looking for.',
+    ],
+    translations: [
+      '메이플 스트리트의 작은 서점은 50년 넘게 그 자리에 있었다.',
+      '나무 선반에는 수천 권의 책이 가득했고, 책등들이 발견되기를 기다리는 이야기들의 다채로운 모자이크를 만들어냈다.',
+      '연로한 주인 톰슨 씨는 모든 책의 위치를 정확히 알고 있었다.',
+      '그는 고객들의 기분과 관심사에 따라 책을 추천해 주곤 했다.',
+      '오래된 종이와 가죽 장정의 냄새는 현대 매장이 절대 재현할 수 없는 분위기를 만들어냈다.',
+      '학생들과 작가들은 종종 몇 시간씩 통로를 둘러보며 자신들이 찾고 있는지도 몰랐던 보물들을 발견했다.',
+    ],
+  },
   // 3. A Walk in the Park
-  `The autumn leaves crunched under Emily's feet as she walked through the city park. Red and golden colors painted the trees, creating a beautiful canopy overhead. Squirrels scurried across the path, gathering acorns for the coming winter months. She found her favorite bench by the pond and sat down to watch the ducks glide across the water. An elderly couple walked past, holding hands and smiling at each other after decades of marriage. Children played on the nearby playground, their laughter echoing through the crisp air. Emily closed her eyes and breathed in the peaceful moment.`,
-
+  {
+    title: 'A Walk in the Park (공원 산책)',
+    sentences: [
+      "The autumn leaves crunched under Emily's feet as she walked through the city park.",
+      'Red and golden colors painted the trees, creating a beautiful canopy overhead.',
+      'Squirrels scurried across the path, gathering acorns for the coming winter months.',
+      'She found her favorite bench by the pond and sat down to watch the ducks glide across the water.',
+      'An elderly couple walked past, holding hands and smiling at each other after decades of marriage.',
+      'Children played on the nearby playground, their laughter echoing through the crisp air.',
+      'Emily closed her eyes and breathed in the peaceful moment.',
+    ],
+    translations: [
+      '에밀리가 도시 공원을 걸을 때 가을 낙엽이 그녀의 발아래에서 바스락거렸다.',
+      '빨강색과 황금색이 나무들을 물들여 머리 위에 아름다운 천막을 만들었다.',
+      '다람쥐들이 다가오는 겨울을 위해 도토리를 모으며 길을 가로질러 재빠르게 달렸다.',
+      '그녀는 연못 옆 좋아하는 벤치를 찾아 앉아 오리들이 수면 위를 미끄러지듯 헤엄치는 것을 바라봤다.',
+      '수십 년의 결혼 생활 끝에도 손을 잡고 서로에게 미소 짓는 노부부가 지나갔다.',
+      '아이들은 근처 놀이터에서 놀았고, 그들의 웃음소리가 상쾌한 공기 속에 울려 퍼졌다.',
+      '에밀리는 눈을 감고 평화로운 순간을 들이마셨다.',
+    ],
+  },
   // 4. The Night Sky
-  `Far away from the city lights, the night sky revealed its true beauty. Thousands of stars sparkled against the dark canvas, telling stories that humans had wondered about for millennia. Tom set up his telescope on the hillside and pointed it toward the constellation Orion. He could see the nebula clearly now, a cosmic nursery where new stars were being born. His daughter sat beside him, asking questions about planets and galaxies with endless curiosity. These moments of wonder reminded him why he had become an astronomer in the first place.`,
-
+  {
+    title: 'The Night Sky (밤하늘)',
+    sentences: [
+      'Far away from the city lights, the night sky revealed its true beauty.',
+      'Thousands of stars sparkled against the dark canvas, telling stories that humans had wondered about for millennia.',
+      'Tom set up his telescope on the hillside and pointed it toward the constellation Orion.',
+      'He could see the nebula clearly now, a cosmic nursery where new stars were being born.',
+      'His daughter sat beside him, asking questions about planets and galaxies with endless curiosity.',
+      'These moments of wonder reminded him why he had become an astronomer in the first place.',
+    ],
+    translations: [
+      '도시의 불빛에서 멀리 떨어진 곳에서 밤하늘은 진정한 아름다움을 드러냈다.',
+      '수천 개의 별들이 어두운 캔버스 위에서 반짝이며 인류가 수천 년간 궁금해해온 이야기들을 들려주었다.',
+      '톰은 언덕에 망원경을 설치하고 오리온 별자리를 향해 맞췄다.',
+      '이제 그는 새로운 별들이 태어나는 우주의 요람인 성운을 선명하게 볼 수 있었다.',
+      '그의 딸이 옆에 앉아 끝없는 호기심으로 행성과 은하에 대해 질문했다.',
+      '이런 경이로운 순간들은 그가 왜 처음에 천문학자가 되었는지를 상기시켜 주었다.',
+    ],
+  },
   // 5. The Coffee Shop
-  `Maya worked at a small coffee shop downtown where she knew all the regular customers by name. Every morning at eight sharp, Mr. Peterson would order his black coffee and read the newspaper at the corner table. College students would study for hours, their laptops and textbooks spread across the wooden tables. Maya enjoyed making latte art, turning simple drinks into small works of art with hearts and leaves. The espresso machine hummed constantly, creating the soundtrack of her workday. She found joy in the small conversations that happened across the counter each day.`,
-
+  {
+    title: 'The Coffee Shop (커피숍)',
+    sentences: [
+      'Maya worked at a small coffee shop downtown where she knew all the regular customers by name.',
+      'Every morning at eight sharp, Mr. Peterson would order his black coffee and read the newspaper at the corner table.',
+      'College students would study for hours, their laptops and textbooks spread across the wooden tables.',
+      'Maya enjoyed making latte art, turning simple drinks into small works of art with hearts and leaves.',
+      'The espresso machine hummed constantly, creating the soundtrack of her workday.',
+      'She found joy in the small conversations that happened across the counter each day.',
+    ],
+    translations: [
+      '마야는 시내 작은 커피숍에서 일했고 모든 단골손님의 이름을 알고 있었다.',
+      '매일 아침 8시 정각에 피터슨 씨는 블랙 커피를 주문하고 구석 테이블에서 신문을 읽곤 했다.',
+      '대학생들은 나무 테이블 위에 노트북과 교과서를 펼쳐놓고 몇 시간씩 공부했다.',
+      '마야는 라떼 아트 만드는 것을 좋아했고, 간단한 음료를 하트와 나뭇잎 모양의 작은 예술 작품으로 바꿨다.',
+      '에스프레소 머신은 끊임없이 윙윙거리며 그녀의 근무일의 배경음악이 되었다.',
+      '그녀는 매일 카운터 너머로 나누는 작은 대화들에서 기쁨을 찾았다.',
+    ],
+  },
   // 6. The Beach at Sunset
-  `The sun slowly descended toward the horizon, painting the sky in shades of orange and purple. Waves rolled gently onto the sandy shore, leaving behind white foam that quickly disappeared. A group of seagulls flew overhead, their calls mixing with the sound of the ocean breeze. Sarah walked barefoot along the water's edge, letting the cool waves touch her feet. She collected seashells and smooth stones, examining each one carefully before deciding whether to keep it. Families packed up their beach chairs and umbrellas as another perfect summer day came to its end.`,
-
+  {
+    title: 'The Beach at Sunset (해질녘 해변)',
+    sentences: [
+      'The sun slowly descended toward the horizon, painting the sky in shades of orange and purple.',
+      'Waves rolled gently onto the sandy shore, leaving behind white foam that quickly disappeared.',
+      'A group of seagulls flew overhead, their calls mixing with the sound of the ocean breeze.',
+      "Sarah walked barefoot along the water's edge, letting the cool waves touch her feet.",
+      'She collected seashells and smooth stones, examining each one carefully before deciding whether to keep it.',
+      'Families packed up their beach chairs and umbrellas as another perfect summer day came to its end.',
+    ],
+    translations: [
+      '태양이 천천히 수평선을 향해 내려가며 하늘을 주황색과 보라색 빛깔로 물들였다.',
+      '파도가 부드럽게 모래 해변으로 밀려와 금방 사라지는 하얀 거품을 남겼다.',
+      '갈매기 떼가 머리 위를 날며 그들의 울음소리가 바다 바람 소리와 섞였다.',
+      '사라는 물가를 따라 맨발로 걸으며 시원한 파도가 발에 닿게 했다.',
+      '그녀는 조개껍데기와 매끈한 돌을 모으며 각각을 간직할지 결정하기 전에 주의 깊게 살펴봤다.',
+      '또 하나의 완벽한 여름날이 끝나가자 가족들은 비치 의자와 파라솔을 챙겼다.',
+    ],
+  },
   // 7. The Mountain Cabin
-  `The wooden cabin sat nestled among towering pine trees, with a stone chimney from which gray smoke rose lazily into the crisp mountain air. Inside, a fire crackled in the fireplace, casting warm dancing shadows on the walls. Jack sat in his leather armchair, reading a mystery novel while his dog slept at his feet. Snow began to fall outside, covering the landscape in a blanket of white. He made himself a cup of hot cocoa and returned to his reading spot. There was no internet here, no phone signal, just the peaceful silence of nature surrounding him.`,
-
+  {
+    title: 'The Mountain Cabin (산속 오두막)',
+    sentences: [
+      'The wooden cabin sat nestled among towering pine trees, with a stone chimney from which gray smoke rose lazily into the crisp mountain air.',
+      'Inside, a fire crackled in the fireplace, casting warm dancing shadows on the walls.',
+      'Jack sat in his leather armchair, reading a mystery novel while his dog slept at his feet.',
+      'Snow began to fall outside, covering the landscape in a blanket of white.',
+      'He made himself a cup of hot cocoa and returned to his reading spot.',
+      'There was no internet here, no phone signal, just the peaceful silence of nature surrounding him.',
+    ],
+    translations: [
+      '나무 오두막은 우뚝 솟은 소나무들 사이에 자리 잡고 있었고, 돌로 된 굴뚝에서는 회색 연기가 상쾌한 산 공기 속으로 느릿느릿 피어올랐다.',
+      '안에서는 벽난로에서 불이 타닥거리며 벽에 따뜻하게 춤추는 그림자를 드리웠다.',
+      '잭은 가죽 안락의자에 앉아 추리 소설을 읽었고 그의 개는 그의 발치에서 잠들어 있었다.',
+      '밖에는 눈이 내리기 시작하며 풍경을 하얀 담요로 덮었다.',
+      '그는 뜨거운 코코아 한 잔을 만들고 읽던 자리로 돌아왔다.',
+      '여기에는 인터넷도, 휴대폰 신호도 없었고, 오직 그를 둘러싼 자연의 평화로운 고요함만 있었다.',
+    ],
+  },
   // 8. The Art Gallery
-  `The modern art gallery stood as a stark white cube in the middle of the bustling city street. Inside, visitors moved quietly from room to room, contemplating paintings and sculptures that challenged their perceptions of beauty. Lisa stood before a large abstract canvas, trying to understand what the artist was attempting to communicate. Colors swirled together in ways that seemed chaotic yet somehow harmonious. A guide led a group of students through the exhibition, explaining the historical context behind each piece. Art had the power to make people feel emotions they could not put into words.`,
-
+  {
+    title: 'The Art Gallery (미술관)',
+    sentences: [
+      'The modern art gallery stood as a stark white cube in the middle of the bustling city street.',
+      'Inside, visitors moved quietly from room to room, contemplating paintings and sculptures that challenged their perceptions of beauty.',
+      'Lisa stood before a large abstract canvas, trying to understand what the artist was attempting to communicate.',
+      'Colors swirled together in ways that seemed chaotic yet somehow harmonious.',
+      'A guide led a group of students through the exhibition, explaining the historical context behind each piece.',
+      'Art had the power to make people feel emotions they could not put into words.',
+    ],
+    translations: [
+      '현대 미술관은 분주한 도심 거리 한가운데 순백의 정육면체로 서 있었다.',
+      '안에서 방문객들은 조용히 방에서 방으로 이동하며 그들의 아름다움에 대한 인식에 도전하는 그림과 조각품들을 감상했다.',
+      '리사는 큰 추상화 캔버스 앞에 서서 화가가 무엇을 전달하려 했는지 이해하려 애썼다.',
+      '색들이 혼란스러워 보이면서도 어딘가 조화롭게 소용돌이쳤다.',
+      '가이드가 학생 그룹을 이끌고 전시를 둘러보며 각 작품 뒤의 역사적 맥락을 설명했다.',
+      '예술은 사람들이 말로 표현할 수 없는 감정을 느끼게 하는 힘이 있었다.',
+    ],
+  },
   // 9. The Music Festival
-  `The summer music festival brought thousands of people together in the open fields outside the city. Colorful tents dotted the landscape, creating a temporary village of music lovers from all walks of life. Bands performed on multiple stages throughout the day and night, their songs carrying across the warm summer air. Friends shared food and drinks while dancing under the stars. Despite being strangers, people connected through their shared love of music and celebration. The bass from the main stage could be felt in everyone's chest, creating a unified heartbeat among the crowd.`,
-
+  {
+    title: 'The Music Festival (음악 축제)',
+    sentences: [
+      'The summer music festival brought thousands of people together in the open fields outside the city.',
+      'Colorful tents dotted the landscape, creating a temporary village of music lovers from all walks of life.',
+      'Bands performed on multiple stages throughout the day and night, their songs carrying across the warm summer air.',
+      'Friends shared food and drinks while dancing under the stars.',
+      'Despite being strangers, people connected through their shared love of music and celebration.',
+      "The bass from the main stage could be felt in everyone's chest, creating a unified heartbeat among the crowd.",
+    ],
+    translations: [
+      '여름 음악 축제는 도시 외곽의 넓은 들판에 수천 명의 사람들을 모았다.',
+      '다채로운 텐트들이 풍경 곳곳에 점점이 흩어져 각계각층에서 온 음악 애호가들의 임시 마을을 만들었다.',
+      '밴드들은 밤낮으로 여러 무대에서 공연했고, 그들의 노래가 따뜻한 여름 공기를 타고 퍼져나갔다.',
+      '친구들은 별빛 아래서 춤추며 음식과 음료를 나눴다.',
+      '서로 낯선 사람들이었지만 음악과 축제에 대한 공유된 사랑으로 연결되었다.',
+      '메인 무대에서 나오는 베이스는 모든 사람의 가슴에서 느껴졌고, 군중 사이에 하나 된 심장박동을 만들어냈다.',
+    ],
+  },
   // 10. The Train Journey
-  `The old steam train whistled as it departed from the station, beginning its journey through the countryside. Passengers settled into their seats, some reading books while others gazed out the windows at the passing scenery. Fields of golden wheat stretched to the horizon, interrupted occasionally by small villages and farmhouses. The rhythm of the wheels on the tracks created a soothing melody that lulled many passengers to sleep. A vendor walked through the carriages selling sandwiches and hot beverages. Travel by train offered something that planes and cars could not provide: time to simply exist.`,
-
+  {
+    title: 'The Train Journey (기차 여행)',
+    sentences: [
+      'The old steam train whistled as it departed from the station, beginning its journey through the countryside.',
+      'Passengers settled into their seats, some reading books while others gazed out the windows at the passing scenery.',
+      'Fields of golden wheat stretched to the horizon, interrupted occasionally by small villages and farmhouses.',
+      'The rhythm of the wheels on the tracks created a soothing melody that lulled many passengers to sleep.',
+      'A vendor walked through the carriages selling sandwiches and hot beverages.',
+      'Travel by train offered something that planes and cars could not provide: time to simply exist.',
+    ],
+    translations: [
+      '오래된 증기 기관차가 역을 떠나며 기적을 울렸고, 시골을 가로지르는 여정이 시작되었다.',
+      '승객들은 자리에 앉았고, 어떤 이들은 책을 읽고 다른 이들은 창밖으로 스쳐 지나가는 풍경을 바라봤다.',
+      '황금빛 밀밭이 지평선까지 펼쳐져 있었고, 가끔 작은 마을과 농가들이 나타났다.',
+      '선로 위를 달리는 바퀴의 리듬은 많은 승객들을 잠들게 하는 편안한 멜로디를 만들어냈다.',
+      '한 행상인이 샌드위치와 따뜻한 음료를 팔며 객차를 지나갔다.',
+      '기차 여행은 비행기나 자동차가 제공할 수 없는 것을 선사했다: 그저 존재할 시간.',
+    ],
+  },
   // 11. The Science Laboratory
-  `Dr. Chen spent countless hours in her laboratory, carefully conducting experiments that could change the future of medicine. Test tubes lined the shelves, each containing samples that represented years of dedicated research work. Her team of young scientists worked alongside her, learning the patience and precision required for breakthrough discoveries. Today they were testing a new compound that showed promising results in early trials. The data on her computer screen indicated positive outcomes, bringing them one step closer to finding a cure. Science was a marathon, not a sprint, and she had learned to celebrate small victories.`,
-
+  {
+    title: 'The Science Laboratory (과학 연구실)',
+    sentences: [
+      'Dr. Chen spent countless hours in her laboratory, carefully conducting experiments that could change the future of medicine.',
+      'Test tubes lined the shelves, each containing samples that represented years of dedicated research work.',
+      'Her team of young scientists worked alongside her, learning the patience and precision required for breakthrough discoveries.',
+      'Today they were testing a new compound that showed promising results in early trials.',
+      'The data on her computer screen indicated positive outcomes, bringing them one step closer to finding a cure.',
+      'Science was a marathon, not a sprint, and she had learned to celebrate small victories.',
+    ],
+    translations: [
+      '첸 박사는 연구실에서 셀 수 없이 많은 시간을 보내며 의학의 미래를 바꿀 수 있는 실험을 신중하게 수행했다.',
+      '시험관들이 선반에 줄지어 있었고, 각각은 수년간의 헌신적인 연구를 대표하는 샘플을 담고 있었다.',
+      '그녀의 젊은 과학자 팀은 그녀와 함께 일하며 획기적인 발견에 필요한 인내심과 정밀함을 배웠다.',
+      '오늘 그들은 초기 실험에서 유망한 결과를 보인 새로운 화합물을 테스트하고 있었다.',
+      '컴퓨터 화면의 데이터는 긍정적인 결과를 나타냈고, 그들을 치료법을 찾는 데 한 발짝 더 가까이 이끌었다.',
+      '과학은 단거리 경주가 아닌 마라톤이었고, 그녀는 작은 승리들을 축하하는 법을 배웠다.',
+    ],
+  },
   // 12. The City at Night
-  `When darkness fell, the city transformed into a sea of lights and shadows. Neon signs flickered to life, advertising restaurants and entertainment venues that stayed open until dawn. Taxis honked their horns as they navigated through busy intersections filled with pedestrians. Young professionals gathered at rooftop bars, enjoying cocktails while overlooking the glittering skyline below. The subway ran every few minutes, carrying tired workers home and excited partygoers into the night. Street musicians played jazz on corners, their melodies mixing with the constant hum of urban life. The city never truly slept.`,
-
+  {
+    title: 'The City at Night (밤의 도시)',
+    sentences: [
+      'When darkness fell, the city transformed into a sea of lights and shadows.',
+      'Neon signs flickered to life, advertising restaurants and entertainment venues that stayed open until dawn.',
+      'Taxis honked their horns as they navigated through busy intersections filled with pedestrians.',
+      'Young professionals gathered at rooftop bars, enjoying cocktails while overlooking the glittering skyline below.',
+      'The subway ran every few minutes, carrying tired workers home and excited partygoers into the night.',
+      'Street musicians played jazz on corners, their melodies mixing with the constant hum of urban life.',
+      'The city never truly slept.',
+    ],
+    translations: [
+      '어둠이 내리자 도시는 빛과 그림자의 바다로 변했다.',
+      '네온 사인이 깜빡이며 켜졌고, 새벽까지 영업하는 레스토랑과 오락 시설을 광고했다.',
+      '택시들이 보행자로 가득 찬 분주한 교차로를 지나며 경적을 울렸다.',
+      '젊은 직장인들이 루프탑 바에 모여 아래 반짝이는 스카이라인을 내려다보며 칵테일을 즐겼다.',
+      '지하철은 몇 분마다 운행되며 피곤한 직장인들을 집으로, 신나는 파티 참석자들을 밤으로 실어 날랐다.',
+      '거리의 음악가들이 모퉁이에서 재즈를 연주했고, 그들의 멜로디가 도시 생활의 끊임없는 윙윙거림과 섞였다.',
+      '도시는 결코 진정으로 잠들지 않았다.',
+    ],
+  },
   // 13. The Garden Sanctuary
-  `Mrs. Williams spent every weekend tending to her beloved garden, a sanctuary she had cultivated over thirty years. Roses of every color bloomed along the fence, their sweet fragrance attracting bees and butterflies throughout the summer months. Vegetable beds produced tomatoes, cucumbers, and peppers that she shared generously with her neighbors. A small fountain trickled in the center, creating a peaceful sound that masked the noise from the nearby road. She taught her grandchildren how to plant seeds and watch them grow, passing down knowledge that connected generations. Gardens were places where patience always rewarded those who waited.`,
-
+  {
+    title: 'The Garden Sanctuary (정원 성소)',
+    sentences: [
+      'Mrs. Williams spent every weekend tending to her beloved garden, a sanctuary she had cultivated over thirty years.',
+      'Roses of every color bloomed along the fence, their sweet fragrance attracting bees and butterflies throughout the summer months.',
+      'Vegetable beds produced tomatoes, cucumbers, and peppers that she shared generously with her neighbors.',
+      'A small fountain trickled in the center, creating a peaceful sound that masked the noise from the nearby road.',
+      'She taught her grandchildren how to plant seeds and watch them grow, passing down knowledge that connected generations.',
+      'Gardens were places where patience always rewarded those who waited.',
+    ],
+    translations: [
+      '윌리엄스 부인은 매 주말마다 그녀가 30년에 걸쳐 가꿔온 성소인 사랑하는 정원을 돌봤다.',
+      '울타리를 따라 온갖 색깔의 장미가 피었고, 그 달콤한 향기는 여름 내내 벌과 나비를 끌어들였다.',
+      '채소밭에서는 토마토, 오이, 고추가 자랐고 그녀는 이웃들과 넉넉히 나눴다.',
+      '작은 분수가 중앙에서 졸졸 흘러 근처 도로의 소음을 가리는 평화로운 소리를 만들어냈다.',
+      '그녀는 손주들에게 씨앗을 심고 자라는 것을 지켜보는 법을 가르쳤고, 세대를 연결하는 지식을 물려주었다.',
+      '정원은 인내가 기다리는 자에게 항상 보상을 주는 곳이었다.',
+    ],
+  },
   // 14. The Championship Game
-  `The stadium erupted with cheers as the home team took the field for the championship game. Fifty thousand fans waved flags and chanted songs that echoed through the night air. Players stretched and warmed up, their faces showing both determination and nervous anticipation. The referee blew the whistle and the match began with both teams fighting for every ball. In the final minutes, with the score tied, a young player received a pass and shot toward the goal. The ball flew past the goalkeeper and into the net. The crowd went wild, celebrating a victory that would be remembered for generations.`,
-
+  {
+    title: 'The Championship Game (챔피언십 경기)',
+    sentences: [
+      'The stadium erupted with cheers as the home team took the field for the championship game.',
+      'Fifty thousand fans waved flags and chanted songs that echoed through the night air.',
+      'Players stretched and warmed up, their faces showing both determination and nervous anticipation.',
+      'The referee blew the whistle and the match began with both teams fighting for every ball.',
+      'In the final minutes, with the score tied, a young player received a pass and shot toward the goal.',
+      'The ball flew past the goalkeeper and into the net.',
+      'The crowd went wild, celebrating a victory that would be remembered for generations.',
+    ],
+    translations: [
+      '홈팀이 챔피언십 경기를 위해 경기장에 들어서자 경기장은 환호성으로 들끓었다.',
+      '5만 명의 팬들이 깃발을 흔들고 밤공기 속에 울려 퍼지는 노래를 불렀다.',
+      '선수들은 스트레칭과 워밍업을 하며 그들의 얼굴에는 결의와 긴장된 기대가 모두 드러났다.',
+      '심판이 휘슬을 불었고 양 팀이 모든 공을 놓고 싸우며 경기가 시작되었다.',
+      '동점인 마지막 몇 분, 젊은 선수가 패스를 받아 골문을 향해 슛을 날렸다.',
+      '공이 골키퍼를 지나 그물 안으로 날아갔다.',
+      '관중들은 열광했고, 세대가 지나도 기억될 승리를 축하했다.',
+    ],
+  },
   // 15. The Library After Hours
-  `When the public library closed at nine, only the cleaning staff and night security remained in the building. Rows of silent books stood on shelves that stretched from floor to ceiling, containing centuries of human knowledge and imagination. The old building had its own sounds at night: creaking floors, humming ventilation, and the occasional settling of wooden beams. Marcus, the security guard, made his rounds with a flashlight, checking each section methodically. He often wondered about all the stories contained in these walls, millions of words waiting patiently for readers who would discover them tomorrow.`,
-
+  {
+    title: 'The Library After Hours (폐관 후 도서관)',
+    sentences: [
+      'When the public library closed at nine, only the cleaning staff and night security remained in the building.',
+      'Rows of silent books stood on shelves that stretched from floor to ceiling, containing centuries of human knowledge and imagination.',
+      'The old building had its own sounds at night: creaking floors, humming ventilation, and the occasional settling of wooden beams.',
+      'Marcus, the security guard, made his rounds with a flashlight, checking each section methodically.',
+      'He often wondered about all the stories contained in these walls, millions of words waiting patiently for readers who would discover them tomorrow.',
+    ],
+    translations: [
+      '공공 도서관이 9시에 문을 닫으면 청소 직원과 야간 경비원만 건물에 남았다.',
+      '조용한 책들의 행렬이 바닥에서 천장까지 뻗은 선반 위에 서 있었고, 수세기의 인류 지식과 상상력을 담고 있었다.',
+      '오래된 건물은 밤에 자체의 소리가 있었다: 삐걱거리는 바닥, 윙윙거리는 환기 장치, 그리고 가끔 나무 대들보가 자리 잡는 소리.',
+      '경비원 마커스는 손전등을 들고 각 구역을 체계적으로 확인하며 순찰을 돌았다.',
+      '그는 종종 이 벽 안에 담긴 모든 이야기들, 내일 발견할 독자들을 인내심 있게 기다리는 수백만 단어들에 대해 궁금해했다.',
+    ],
+  },
   // 16. The Mountain Summit
-  `After climbing for six hours, Maria finally reached the summit of Mount Wilson. The view from the top took her breath away more than the thin mountain air ever could. Rolling peaks stretched to the horizon in every direction, their slopes covered in forests that looked tiny from this height. She sat on a flat rock and pulled out her water bottle, drinking deeply while her legs recovered from the difficult ascent. Other hikers arrived and shared the moment of triumph with high fives and photographs. Standing above the clouds reminded her of how small yet capable humans truly were.`,
-
+  {
+    title: 'The Mountain Summit (산 정상)',
+    sentences: [
+      'After climbing for six hours, Maria finally reached the summit of Mount Wilson.',
+      'The view from the top took her breath away more than the thin mountain air ever could.',
+      'Rolling peaks stretched to the horizon in every direction, their slopes covered in forests that looked tiny from this height.',
+      'She sat on a flat rock and pulled out her water bottle, drinking deeply while her legs recovered from the difficult ascent.',
+      'Other hikers arrived and shared the moment of triumph with high fives and photographs.',
+      'Standing above the clouds reminded her of how small yet capable humans truly were.',
+    ],
+    translations: [
+      '6시간을 등반한 끝에 마리아는 마침내 윌슨 산 정상에 도착했다.',
+      '정상에서의 전망은 희박한 산 공기보다 더 그녀의 숨을 멎게 했다.',
+      '구불구불한 봉우리들이 사방으로 수평선까지 뻗어 있었고, 그 경사면은 이 높이에서 작아 보이는 숲으로 덮여 있었다.',
+      '그녀는 평평한 바위에 앉아 물병을 꺼내 힘든 등반에서 다리가 회복되는 동안 깊이 마셨다.',
+      '다른 등산객들이 도착했고 하이파이브와 사진으로 승리의 순간을 함께 나눴다.',
+      '구름 위에 서 있자 인간이 얼마나 작지만 또 얼마나 능력 있는지를 상기시켜 주었다.',
+    ],
+  },
   // 17. The Cooking Class
-  `The cooking class met every Tuesday evening in the community center kitchen, where amateur chefs learned the secrets of Italian cuisine. Chef Antonio demonstrated techniques with theatrical flair, chopping vegetables and tossing pasta with practiced ease. Students followed along at their stations, some successfully and others with humorous disasters that made everyone laugh. The aroma of garlic and herbs filled the air as sauces simmered on the stoves. By the end of each class, everyone sat together to taste their creations and share stories over wine. Food had always been a way to bring strangers together.`,
-
+  {
+    title: 'The Cooking Class (요리 수업)',
+    sentences: [
+      'The cooking class met every Tuesday evening in the community center kitchen, where amateur chefs learned the secrets of Italian cuisine.',
+      'Chef Antonio demonstrated techniques with theatrical flair, chopping vegetables and tossing pasta with practiced ease.',
+      'Students followed along at their stations, some successfully and others with humorous disasters that made everyone laugh.',
+      'The aroma of garlic and herbs filled the air as sauces simmered on the stoves.',
+      'By the end of each class, everyone sat together to taste their creations and share stories over wine.',
+      'Food had always been a way to bring strangers together.',
+    ],
+    translations: [
+      '요리 수업은 매주 화요일 저녁 커뮤니티 센터 주방에서 열렸고, 아마추어 요리사들이 이탈리아 요리의 비법을 배웠다.',
+      '안토니오 셰프는 연극적인 재능으로 기술을 시연하며 숙련된 솜씨로 채소를 썰고 파스타를 던졌다.',
+      '학생들은 각자의 조리대에서 따라 했는데, 어떤 이들은 성공적이었고 다른 이들은 모두를 웃게 만드는 유쾌한 재앙을 겪었다.',
+      '소스가 스토브 위에서 끓으며 마늘과 허브 향이 공기를 가득 채웠다.',
+      '각 수업이 끝날 때마다 모두 함께 앉아 자신들의 작품을 맛보고 와인을 마시며 이야기를 나눴다.',
+      '음식은 항상 낯선 이들을 하나로 모으는 방법이었다.',
+    ],
+  },
   // 18. The Rainy Afternoon
-  `The rain had been falling steadily since morning, turning the streets into rivers of reflected light. People hurried past with umbrellas, their footsteps creating splashes on the wet sidewalk. Alex sat by the cafe window, watching droplets race down the glass while his coffee grew cold. There was something peaceful about rainy days that made the world slow down. The gray sky muted all colors, creating a soft atmosphere that invited contemplation and rest. He wrote in his journal, filling pages with thoughts that seemed clearer when the weather matched his introspective mood.`,
-
+  {
+    title: 'The Rainy Afternoon (비 오는 오후)',
+    sentences: [
+      'The rain had been falling steadily since morning, turning the streets into rivers of reflected light.',
+      'People hurried past with umbrellas, their footsteps creating splashes on the wet sidewalk.',
+      'Alex sat by the cafe window, watching droplets race down the glass while his coffee grew cold.',
+      'There was something peaceful about rainy days that made the world slow down.',
+      'The gray sky muted all colors, creating a soft atmosphere that invited contemplation and rest.',
+      'He wrote in his journal, filling pages with thoughts that seemed clearer when the weather matched his introspective mood.',
+    ],
+    translations: [
+      '아침부터 비가 꾸준히 내리며 거리를 반사된 빛의 강으로 바꿨다.',
+      '사람들은 우산을 쓰고 서둘러 지나갔고, 그들의 발걸음은 젖은 보도에서 물보라를 일으켰다.',
+      '알렉스는 카페 창가에 앉아 커피가 식어가는 동안 물방울이 유리를 타고 경주하듯 흘러내리는 것을 바라봤다.',
+      '비 오는 날에는 세상을 느리게 만드는 무언가 평화로운 것이 있었다.',
+      '회색 하늘이 모든 색을 차분하게 만들어 사색과 휴식을 초대하는 부드러운 분위기를 연출했다.',
+      '그는 일기장에 글을 썼고, 날씨가 그의 성찰적인 기분과 맞아떨어질 때 더 선명해 보이는 생각들로 페이지를 채웠다.',
+    ],
+  },
   // 19. The Antique Shop
-  `Hidden on a side street, the antique shop was easy to miss unless you knew where to look. Inside, every surface was covered with objects from different eras and distant places around the world. Grandfather clocks ticked in different rhythms, creating an unusual symphony of passing time. Mrs. Patterson, the owner, could tell you the history of every item in her collection and how it found its way to her shop. Visitors often left with unexpected purchases, items that seemed to choose them rather than the other way around. Old things carried stories that new things simply could not tell.`,
-
+  {
+    title: 'The Antique Shop (골동품 가게)',
+    sentences: [
+      'Hidden on a side street, the antique shop was easy to miss unless you knew where to look.',
+      'Inside, every surface was covered with objects from different eras and distant places around the world.',
+      'Grandfather clocks ticked in different rhythms, creating an unusual symphony of passing time.',
+      'Mrs. Patterson, the owner, could tell you the history of every item in her collection and how it found its way to her shop.',
+      'Visitors often left with unexpected purchases, items that seemed to choose them rather than the other way around.',
+      'Old things carried stories that new things simply could not tell.',
+    ],
+    translations: [
+      '골목길에 숨겨진 골동품 가게는 어디를 찾아야 하는지 알지 못하면 놓치기 쉬웠다.',
+      '안에는 모든 표면이 다른 시대와 세계 곳곳의 먼 장소에서 온 물건들로 덮여 있었다.',
+      '할아버지 시계들이 서로 다른 리듬으로 째깍거리며 흘러가는 시간의 특이한 교향곡을 만들어냈다.',
+      '주인인 패터슨 부인은 소장품의 모든 물건의 역사와 그것이 어떻게 가게에 오게 되었는지 말해줄 수 있었다.',
+      '방문객들은 종종 예상치 못한 구매를 하고 떠났는데, 그 반대가 아니라 물건들이 그들을 선택한 것 같았다.',
+      '오래된 것들은 새것들이 단순히 말할 수 없는 이야기를 담고 있었다.',
+    ],
+  },
   // 20. The Final Chapter
-  `Robert typed the last sentence of his novel and sat back in his chair with a mixture of exhaustion and satisfaction. Three years of work had led to this moment: a completed manuscript sitting on his desk. The characters he had created felt like old friends now, their journeys finally reaching conclusions he hoped readers would find meaningful. He saved the file multiple times on different devices, paranoid after hearing stories of lost manuscripts. Tomorrow he would begin the editing process, but tonight he would celebrate this milestone. Writing a book was proof that ordinary people could create extraordinary things.`,
+  {
+    title: 'The Final Chapter (마지막 장)',
+    sentences: [
+      'Robert typed the last sentence of his novel and sat back in his chair with a mixture of exhaustion and satisfaction.',
+      'Three years of work had led to this moment: a completed manuscript sitting on his desk.',
+      'The characters he had created felt like old friends now, their journeys finally reaching conclusions he hoped readers would find meaningful.',
+      'He saved the file multiple times on different devices, paranoid after hearing stories of lost manuscripts.',
+      'Tomorrow he would begin the editing process, but tonight he would celebrate this milestone.',
+      'Writing a book was proof that ordinary people could create extraordinary things.',
+    ],
+    translations: [
+      '로버트는 그의 소설의 마지막 문장을 타이핑하고 피로와 만족이 뒤섞인 채 의자에 기대앉았다.',
+      '3년간의 작업이 이 순간으로 이어졌다: 책상 위에 놓인 완성된 원고.',
+      '그가 창조한 등장인물들은 이제 오랜 친구처럼 느껴졌고, 그들의 여정은 마침내 독자들이 의미 있게 여기길 바라는 결론에 도달했다.',
+      '잃어버린 원고 이야기를 듣고 불안해진 그는 파일을 여러 기기에 여러 번 저장했다.',
+      '내일 그는 편집 과정을 시작하겠지만, 오늘 밤은 이 이정표를 축하할 것이다.',
+      '책을 쓴다는 것은 평범한 사람들이 비범한 것을 창조할 수 있다는 증거였다.',
+    ],
+  },
 ];
+
+// 기존 호환성을 위한 평면 배열 (content 생성)
+export const englishParagraphs: string[] = englishParagraphsData.map(p => p.sentences.join(' '));

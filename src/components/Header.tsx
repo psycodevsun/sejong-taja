@@ -23,13 +23,13 @@ export function Header({ language, onLanguageChange }: HeaderProps) {
               className={`${styles.langBtn} ${language === 'korean' ? styles.active : ''}`}
               onClick={() => onLanguageChange('korean')}
             >
-              한글
+              한글타자
             </button>
             <button
               className={`${styles.langBtn} ${language === 'english' ? styles.active : ''}`}
               onClick={() => onLanguageChange('english')}
             >
-              English
+              영문타자
             </button>
           </div>
         </nav>

@@ -228,12 +228,26 @@
   color: var(--text-primary);
 }
 
-/* 번역 표시 */
+/* 번역 표시 (단어/단문용) */
 .translation {
   font-size: 0.9rem;
   color: var(--text-muted);
   margin-top: -0.35rem;
   text-align: left;
+}
+
+/* 영어 장문 번역 표시 */
+.paragraphTranslation {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  font-size: 0.9rem;
+  line-height: 1.8;
+  color: var(--text-muted);
+  background: var(--bg-tertiary);
+  border-radius: 0.5rem;
+  border-left: 3px solid var(--primary);
+  max-height: 200px;
+  overflow-y: auto;
 }
 
 /* 장문 헤더 (제목 + 글 선택 버튼) */

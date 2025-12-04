@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import './styles/global.css';
 import { Header } from './components/Header';
 import { ModeSelector } from './components/ModeSelector';
@@ -28,6 +29,7 @@ function App() {
       </main>
 
       <Footer />
+      <Analytics />
     </div>
   );
 }
