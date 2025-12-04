@@ -1,0 +1,230 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem 1.5rem;
+}
+
+.difficultySelector {
+  display: flex;
+  gap: 0.5rem;
+  background: var(--bg-secondary);
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+}
+
+.diffBtn {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: transparent;
+  border-radius: 0.375rem;
+  transition: all var(--transition-fast);
+}
+
+.diffBtn:hover {
+  color: var(--text-primary);
+}
+
+.diffBtn.active {
+  background: var(--primary);
+  color: var(--text-primary);
+}
+
+.practiceArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 900px;
+}
+
+.typingSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 2rem;
+  background: var(--bg-secondary);
+  border: 2px solid var(--bg-tertiary);
+  border-radius: 1rem;
+  cursor: text;
+}
+
+.typingSection.paragraph {
+  gap: 2rem;
+}
+
+.lineGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.targetLine {
+  font-size: 1.5rem;
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+  font-family: var(--font-sans);
+  word-break: break-all;
+  overflow-wrap: break-word;
+}
+
+.inputLine {
+  font-size: 1.5rem;
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+  font-family: var(--font-sans);
+  min-height: 1.8em;
+  color: var(--text-secondary);
+  word-break: break-all;
+  overflow-wrap: break-word;
+}
+
+.char {
+  transition: all var(--transition-fast);
+}
+
+.char.correct {
+  color: var(--success);
+}
+
+.char.incorrect {
+  color: var(--error);
+  background: rgba(239, 68, 68, 0.2);
+  border-radius: 2px;
+}
+
+.char.current {
+  background: var(--primary);
+  color: var(--text-primary);
+  border-radius: 2px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.hiddenInput {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.startHint {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.resetBtn {
+  padding: 0.75rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--bg-tertiary);
+  border-radius: 0.5rem;
+  transition: all var(--transition-fast);
+}
+
+.resetBtn:hover {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+/* 결과 화면 */
+.result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(249, 115, 22, 0.05));
+  border: 2px solid var(--primary);
+  border-radius: 1rem;
+  width: 100%;
+}
+
+.resultTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.resultStats {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.resultItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.resultValue {
+  font-size: 2rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--primary-light);
+}
+
+.resultValue.success {
+  color: var(--success);
+}
+
+.resultValue.error {
+  color: var(--error);
+}
+
+.resultLabel {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.nextBtn {
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: var(--primary);
+  border-radius: 0.5rem;
+  transition: all var(--transition-fast);
+}
+
+.nextBtn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
+}
+
+@media (max-width: 640px) {
+  .typingSection {
+    padding: 1.5rem;
+  }
+
+  .targetLine,
+  .inputLine {
+    font-size: 1.25rem;
+  }
+
+  .resultStats {
+    gap: 1rem;
+  }
+
+  .resultValue {
+    font-size: 1.5rem;
+  }
+}
