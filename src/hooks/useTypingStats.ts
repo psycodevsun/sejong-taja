@@ -25,15 +25,6 @@ function getKoreanStrokeCount(char: string): number {
   return 1;
 }
 
-// 문자열의 총 타수 계산
-function calculateTotalStrokes(text: string): number {
-  let strokes = 0;
-  for (const char of text) {
-    strokes += getKoreanStrokeCount(char);
-  }
-  return strokes;
-}
-
 // 타자 통계 관리 훅
 export function useTypingStats() {
   const [stats, setStats] = useState<TypingStats>({
