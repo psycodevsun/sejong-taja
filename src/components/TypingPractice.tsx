@@ -73,6 +73,7 @@ export function TypingPractice({ language, mode }: TypingPracticeProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const autoAdvanceTimerRef = useRef<number | null>(null);
   const currentLineRef = useRef<HTMLDivElement>(null);
+  const prevLineIndexRef = useRef<number>(0);
   const {
     startTyping,
     endTyping,
@@ -369,7 +370,7 @@ export function TypingPractice({ language, mode }: TypingPracticeProps) {
   const result = isCompleted ? calculateResult(userInput, targetText) : null;
 
   // 현재 입력 중인 라인 인덱스 계산
-  const getCurrentLineIndex = () => {
+  const getCurrentLineIndex = useCallback(() => {
     if (mode !== 'paragraph') return 0;
 
     const sentences = targetText.split(/(?<=\.) /);
@@ -385,7 +386,19 @@ export function TypingPractice({ language, mode }: TypingPracticeProps) {
       currentIndex = lineEnd;
     }
     return sentences.length - 1;
-  };
+  }, [mode, targetText, userInput.length]);
+
+  const currentLineIndex = getCurrentLineIndex();
+
+  // 줄이 바뀔 때 스크롤 요청
+  useEffect(() => {
+    if (mode !== 'paragraph') return;
+
+    if (currentLineIndex !== prevLineIndexRef.current) {
+      prevLineIndexRef.current = currentLineIndex;
+      setScrollRequested((prev) => prev + 1);
+    }
+  }, [currentLineIndex, mode]);
 
   // 스크롤 요청 시 현재 라인으로 스크롤 (화면에서 벗어났을 때만)
   useEffect(() => {
@@ -423,7 +436,7 @@ export function TypingPractice({ language, mode }: TypingPracticeProps) {
       lines = [{ text: targetText, startIndex: 0 }];
     }
 
-    const currentLineIdx = getCurrentLineIndex();
+    const currentLineIdx = currentLineIndex;
 
     return lines.map((lineData, lineIndex) => {
       const { text: line, startIndex: lineStartIndex } = lineData;
