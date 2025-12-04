@@ -4,6 +4,7 @@ import { Header } from './components/Header';
 import { ModeSelector } from './components/ModeSelector';
 import { PositionPractice } from './components/PositionPractice';
 import { TypingPractice } from './components/TypingPractice';
+import { Footer } from './components/Footer';
 import type { Language, PracticeMode } from './types';
 
 function App() {
@@ -26,16 +27,7 @@ function App() {
         </section>
       </main>
 
-      <footer style={{
-        textAlign: 'center',
-        padding: '2rem',
-        color: 'var(--text-muted)',
-        fontSize: '0.875rem',
-        borderTop: '1px solid var(--bg-tertiary)',
-        marginTop: 'auto',
-      }}>
-        을지타자연습 - 타자 연습의 정석
-      </footer>
+      <Footer />
     </div>
   );
 }
