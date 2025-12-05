@@ -361,6 +361,11 @@ export function TypingPractice({ language, mode }: TypingPracticeProps) {
             generateNewText(false);
           }, AUTO_ADVANCE_DELAY);
         }
+
+        // 장문 모드에서 완료 시 맨 위로 스크롤
+        if (mode === 'paragraph') {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
       }
     }
   };
